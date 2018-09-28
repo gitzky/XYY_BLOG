@@ -39,7 +39,6 @@ class NoticeController extends Controller
 
     function uploadImg()
     {
-       ;     
-    	return json_encode($img);
+
     }
 }
