@@ -25,12 +25,6 @@
 			<a class="layui-btn layui-btn-normal newsAdd_btn">添加文章</a>
 		</div>
 		<div class="layui-inline">
-			<a class="layui-btn recommend" style="background-color:#5FB878">推荐文章</a>
-		</div>
-		<div class="layui-inline">
-			<a class="layui-btn audit_btn">审核文章</a>
-		</div>
-		<div class="layui-inline">
 			<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
 		</div>
 		<div class="layui-inline">
@@ -54,10 +48,8 @@
 					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
 					<th style="text-align:left;">文章标题</th>
 					<th>发布人</th>
-					<th>审核状态</th>
-					<th>浏览权限</th>
-					<th>是否展示</th>
 					<th>发布时间</th>
+					<th>是否展示</th>
 					<th>操作</th>
 				</tr> 
 		    </thead>

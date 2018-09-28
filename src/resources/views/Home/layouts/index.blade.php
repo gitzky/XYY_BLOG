@@ -4,7 +4,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>小元元博客</title>
-	
+	<?php
+
+		
+	?>
 
 	<link href="plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/common.css" />

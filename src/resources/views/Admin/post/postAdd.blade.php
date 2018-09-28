@@ -17,36 +17,28 @@
 <body class="childrenBody">
 	<form class="layui-form" style="width:90%">
 		<div class="layui-form-item">
-		    <label class="layui-form-label">文章类别</label>
-		    <div class="layui-input-block">
-			    <select name="type" lay-verify="required" lay-search>
-					<option value=""></option>
-					@foreach($res as $v)
-				   	<option value="{{$v->type}}">{{$v->type}}</option>
-				    @endforeach
-				</select> 	
-		    </div>
-	   </div>
-		<div class="layui-form-item">
 			<label class="layui-form-label">文章标题</label>
 			<div class="layui-input-block">
 				<input type="text" class="layui-input newsName" lay-verify="required" placeholder="请输入文章标题">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<div class="layui-inline">
-				<label class="layui-form-label">自定义属性</label>
-				<div class="layui-input-block">
-					<input type="checkbox" name="tuijian" class="tuijian" title="推荐">
-					<input type="checkbox" name="shenhe" class="newsStatus" title="审核">
-					<input type="checkbox" name="show" class="isShow" title="展示">
-				</div>
-			</div>
 			<div class="layui-inline">		
 				<label class="layui-form-label">文章作者</label>
 				<div class="layui-input-inline">
 					<input type="text" class="layui-input newsAuthor" lay-verify="required" placeholder="请输入文章作者">
 				</div>
+			</div>
+			<div class="layui-inline" >		
+				<label class="layui-form-label">文章类别</label>
+			    <div class="layui-input-block">
+				    <select name="type" lay-verify="required" lay-search>
+						<option value=""></option>
+						@foreach($res as $v)
+					   	<option value="{{$v->type}}">{{$v->type}}</option>
+					    @endforeach
+					</select> 	
+			    </div>
 			</div>
 			<div class="layui-inline">		
 				<label class="layui-form-label">发布时间</label>
@@ -54,32 +46,42 @@
 					<input type="text" class="layui-input newsTime" lay-verify="date" onclick="layui.laydate({elem:this})">
 				</div>
 			</div>
-			<div class="layui-inline">
-				<label class="layui-form-label">浏览权限</label>
-				<div class="layui-input-inline">
-					<select name="browseLook" class="newsLook" lay-filter="browseLook">
-				        <option value="0">开放浏览</option>
-				        <option value="1">会员浏览</option>
-				    </select>
-				</div>
-			</div>
+
+
+			
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">关键字</label>
 			<div class="layui-input-block">
-				<input type="text" class="layui-input" placeholder="请输入文章关键字">
+				@foreach($res as $v)
+				<input type="checkbox" name="" title="{{$v->type}}" >
+				@endforeach
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">内容摘要</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容摘要" class="layui-textarea"></textarea>
+				<textarea placeholder="请输入内容摘要" class="layui-textarea" ></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
+			<label class="layui-form-label">摘要配图</label>
+			<div class="layui-input-block">
+				<span style="display:inline-block;width:160px;height:160px;background-color:#ccc;border:1px solid #ccc">
+					<img style="width:100%;" src="/uploads/image/20180927/1538035664471130.jpg" alt="">
+				</span>
+				<span style="display:inline-block;position:absolute;top:125px;left:180px">
+				
+				  	<input type="file" name="file" >
+				
+				</span>
+				
+			</div>
+		</div>
+		<div class="layui-form-item"style="height:400px">
 			<label class="layui-form-label">文章内容</label>
 			<div class="layui-input-block">
-		    	<textarea style=" width:100%;height:300px;" name="contents" id="contents" ></textarea>
+		    	<textarea style="position:absolute;z-index:0;width:100%;height:350px;" name="contents" id="contents" ></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -93,3 +95,14 @@
 	<script type="text/javascript" src="/adm/post/postAdd.js"></script>
 </body>
 </html>
+<script>
+layui.use('upload', function(){
+  layui.upload({
+	  url: '/admin/uploadImg'
+	  ,success: function(res){
+	    console.log(res); //上传成功返回值，必须为json格式
+	  }
+	});   
+});
+ 
+</script>

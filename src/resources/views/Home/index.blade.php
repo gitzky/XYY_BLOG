@@ -154,22 +154,18 @@
 				</div>
 				<div class="panel-body">
 					<div class="labelList">
-						<a class="label label-default">java</a>
-						<a class="label label-default">tomcat负载均衡</a>
-						<a class="label label-default">panel</a>
-						<a class="label label-default" href="/tag/jQuery">jQuery</a>
-						<a class="label label-default" href="/tag/jQuery选择器">jQuery选择器</a>
-						<a class="label label-default" href="/tag/linux">linux</a>
-						<a class="label label-default" href="/tag/Nginx">Nginx</a>
-						<a class="label label-default" href="/tag/linux文件类型">linux文件类型</a>
-						
+					@forelse($postTypes as $v)
+						<a class="label label-default" href="#">{{$v->type}}</a>
+					@empty
+						<a href="javascript:;">暂无热门标签</a>
+					@endforelse		
 					</div>
 				</div>
 			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">最新发布</h3>
+					<h3 class="panel-title">热门文章</h3>
 				</div>
 				<div class="panel-body">
 					<ul class="list-unstyled sidebar">
