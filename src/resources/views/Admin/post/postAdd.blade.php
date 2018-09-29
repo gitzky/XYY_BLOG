@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -95,3 +95,31 @@
 	<script type="text/javascript" src="/adm/post/postAdd.js"></script>
 </body>
 </html>
+ -->
+
+​ <div id="app"></div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/uploadImg.js"></script>
+
+<script>
+/*
+1.引入uploadImg.js
+2. el:绑定需要上传图片的按钮("#id")
+3. url:图片上传请求接口
+3. seccess:成功后的回调
+
+*/
+
+window.onload=function(){
+
+	UploadImg({
+		el:"#app",
+		url:"/admin/uploadImg",
+		success:function (res){
+			console.log(res)        
+		}
+	})
+}
+
+</script>
