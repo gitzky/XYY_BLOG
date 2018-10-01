@@ -37,27 +37,5 @@ class NoticeController extends Controller
 
     }
 
-    function uploadImg(Request $request)
-    {   
-
-        //执行上传图像
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');  //获取UploadFile实例
-            if ( $file->isValid()) { //判断文件是否有效
-                //$filename = $file->getClientOriginalName(); //文件原名称
-                $extension = $file->getClientOriginalExtension(); //扩展名
-                $filename = time() . "." . $extension;    //重命名
-                $path=base_path("../img\uploads\upload");
-                $res=$file->move($path, $filename); //移动至指定目录
-            }
-        }else{
-            return "<script>alert('您还没有上传图片哦');window.location.href='/home/user_set'</script>";
-        }
-
-        if($res){
-            return 1;
-        }
-        
-       
-    }
+    
 }

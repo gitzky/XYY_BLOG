@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -15,7 +15,8 @@
 	<script src="/uedit/ueditor.all.js"></script>
 </head>
 <body class="childrenBody">
-	<form class="layui-form" style="width:90%">
+
+	<div class="layui-form" style="width:90%">
 		<div class="layui-form-item">
 			<label class="layui-form-label">文章标题</label>
 			<div class="layui-input-block">
@@ -32,7 +33,7 @@
 			<div class="layui-inline" >		
 				<label class="layui-form-label">文章类别</label>
 			    <div class="layui-input-block">
-				    <select name="type" lay-verify="required" lay-search>
+				    <select name="type" lay-verify="required" lay-search class="newsType">
 						<option value=""></option>
 						@foreach($res as $v)
 					   	<option value="{{$v->type}}">{{$v->type}}</option>
@@ -61,27 +62,26 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">内容摘要</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容摘要" class="layui-textarea" ></textarea>
+				<textarea placeholder="请输入内容摘要" class="layui-textarea newsIntro" ></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">摘要配图</label>
 			<div class="layui-input-block">
-				<span style="display:inline-block;width:160px;height:160px;background-color:#ccc;border:1px solid #ccc">
-					<img style="width:100%;" src="/uploads/image/20180927/1538035664471130.jpg" alt="">
+				<span style="display:inline-block;width:160px;height:auto;background-color:#ccc;border:1px solid #ccc">
+					<img id="returnImgUrl" style="width:100%;" src="/uploads/image/20180927/1538035664471130.jpg" alt="">
 				</span>
-				<span style="display:inline-block;position:absolute;top:125px;left:180px">
+				<input type="hidden" name="photo" value="" class="newsIntroImg">
+				<div id="app"></div>
 				
-				  	<input type="file" name="file" >
-				
-				</span>
+				 
 				
 			</div>
 		</div>
 		<div class="layui-form-item"style="height:400px">
 			<label class="layui-form-label">文章内容</label>
 			<div class="layui-input-block">
-		    	<textarea style="position:absolute;z-index:0;width:100%;height:350px;" name="contents" id="contents" ></textarea>
+		    	<textarea style="position:absolute;z-index:0;width:100%;height:350px;" name="contents" id="contents" >111</textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -90,14 +90,20 @@
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 		    </div>
 		</div>
-	</form>
+
+	</div>
+
+
+		  	
+		
+
 	<script type="text/javascript" src="/adm/layui/layui.js"></script>
 	<script type="text/javascript" src="/adm/post/postAdd.js"></script>
 </body>
 </html>
- -->
 
-​ <div id="app"></div>
+
+​
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/uploadImg.js"></script>
@@ -111,13 +117,19 @@
 
 */
 
+
+
+
+
 window.onload=function(){
+
 
 	UploadImg({
 		el:"#app",
 		url:"/admin/uploadImg",
 		success:function (res){
-			console.log(res)        
+			$("#returnImgUrl")[0].src=res;
+
 		}
 	})
 }

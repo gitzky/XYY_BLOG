@@ -1,8 +1,8 @@
 
 function UploadImg(formCon){
 
-	$(formCon.el).html('<form id="imageWrapBox"><input type="file" name="file" id="fileimageWrapBox" style="display: none;" />'
-					+'<label id="imgButton" for="fileimageWrapBox" style="display: inline-block;width: 80px;height: 30px;'
+	$(formCon.el).html('<form id="imageWrapBox" style="width:80px"><input type="file" name="file" id="fileimageWrapBox" style="display: none;" />'
+					+'<label id="imgButton" for="fileimageWrapBox" style="display: inline-block;width: 80px;height: 30px;margin:10px 0;'
 					+'background:#009688;text-align: center;line-height: 30px;color:#fff;border-radius:3px">上 传</label></form>')
 
 		$("#uploadImg").css({
@@ -22,15 +22,18 @@ function UploadImg(formCon){
 
 		$("#fileimageWrapBox").change(function(){
 			var formData = new FormData($("#imageWrapBox")[0]);  
-		    $.ajax({            
-		      	url: formCon.url,           
-		      	type: 'POST',            
-		      	data: formData,            
-		      	contentType: false,           
-		      	processData: false,           
-		      	success:formCon.success
-		            
-		    });
+			if($(this)[0].value){
+
+			    $.ajax({            
+			      	url: formCon.url,           
+			      	type: 'POST',            
+			      	data: formData,            
+			      	contentType: false,           
+			      	processData: false,           
+			      	success:formCon.success
+			            
+			    });
+			}
 
 		})
 

@@ -8,11 +8,18 @@ layui.config({
 		laydate = layui.laydate,
 		$ = layui.jquery;
 
-	// 
-	var ue=UE.getEditor('contents'); 
+	
+ 	var ue=UE.getEditor('contents'); 
+
+
+
 
  	var addNewsArray = [],addNews;
  	form.on("submit(addNews)",function(data){
+ 		alert(111)
+ 		var html = ue.getContent()
+		
+		console.log(html)
  		//是否添加过信息
 	 	if(window.sessionStorage.getItem("addNews")){
 	 		addNewsArray = JSON.parse(window.sessionStorage.getItem("addNews"));
@@ -20,9 +27,12 @@ layui.config({
 	 	
  		addNews = '{"newsName":"'+$(".newsName").val()+'",';  //文章名称
  		addNews += '"newsId":"'+new Date().getTime()+'",';	 //文章id
- 		addNews += '"newsTime":"'+$(".newsTime").val()+'",'; //发布时间
  		addNews += '"newsAuthor":"'+$(".newsAuthor").val()+'",'; //文章作者
- 		addNews += '"isShow":"'+ isShow +'"}'; //是否暂时
+ 		addNews += '"newsType":"'+$(".newsType").val()+'",'; //文章类别
+ 		addNews += '"newsTime":"'+$(".newsTime").val()+'",'; //发布时间
+ 		addNews += '"newsIntro":"'+$(".newsIntro").val()+'",'; //内容摘要
+ 		addNews += '"newsIntroImg":"'+$(".newsIntroImg").val()+'",'; //摘要配图
+ 		addNews += '"newsContent":"'+ html +'"}'; //文章内容
  		addNewsArray.unshift(JSON.parse(addNews));
  		addNewsArray=JSON.stringify(addNewsArray);
  		window.sessionStorage.setItem("addNews",addNewsArray);

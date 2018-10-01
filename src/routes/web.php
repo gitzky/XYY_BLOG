@@ -125,7 +125,7 @@ Route::get('notice','NoticeController@notice');
 Route::any('setNotice','NoticeController@updateNotice');
 
 
-Route::any('uploadImg','NoticeController@uploadImg');
+Route::any('uploadImg','PostController@uploadImg');
 
 
 // ----------------------------------------------------
