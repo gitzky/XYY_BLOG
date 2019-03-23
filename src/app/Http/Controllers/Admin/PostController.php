@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 //后台商品管理控制器
 class PostController extends Controller
 {
-    //商品管理首页，列表页-------(商品编码规则：1-1-1-1-33【类型id-颜色id-尺寸id-价格id-商品id】)
+    
     public function list()
     {
     	return view("Admin/post/postList");
@@ -87,5 +87,49 @@ class PostController extends Controller
         }
     }
 
+
+    function postAdd(){
+        $data=$_GET['data'];
+  
+        $data=json_decode($data);
+        //$data->newsKey=explode(',',$data->newsKey);
+        $formCon['newsType']=$data->newsType;
+        $formCon['newsName']=$data->newsName;
+        $formCon['newsAuthor']=$data->newsAuthor;
+        $formCon['newsTime']=$data->newsTime;
+        $formCon['newsKey']=$data->newsKey;
+        $formCon['newsIntro']=$data->newsIntro;
+        $formCon['newsIntroImg']=$data->newsIntroImg;
+        $formCon['newsContent']=$_GET['content'];
+
+        $res=DB::table('posts')->insert($formCon);
+        if($res){
+            $list['code']=1;
+            $list['status']="success";
+        }else{
+            $list['code']=0;
+            $list['status']="error";
+        }
+        return json_encode($list);
+
+    }
+
+    function getData(){
+        $data=DB::table('posts')->get()->toArray();
+        return json_encode($data);
+    }
+
+    function delPost(){
+        $id=$_GET['newsId'];
+        $res=DB::table('posts')->delete($id);
+        if($res){
+            $data['code']='1';
+            $data['msg']='success';
+        }else{
+            $data['code']='0';
+            $data['msg']='error';
+        }
+        return json_encode($data);
+    }
 
 }

@@ -36,7 +36,7 @@
 				    <select name="type" lay-verify="required" lay-search class="newsType">
 						<option value=""></option>
 						@foreach($res as $v)
-					   	<option value="{{$v->type}}">{{$v->type}}</option>
+					   	<option value="{{$v->id}}">{{$v->type}}</option>
 					    @endforeach
 					</select> 	
 			    </div>
@@ -53,9 +53,9 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">关键字</label>
-			<div class="layui-input-block">
+			<div class="layui-input-block keyWords">
 				@foreach($res as $v)
-				<input type="checkbox" name="" title="{{$v->type}}" >
+				<input type="checkbox" class="keyWord" name="keyWord[]" val="{{$v->id}}" title="{{$v->type}}" >
 				@endforeach
 			</div>
 		</div>
@@ -69,19 +69,19 @@
 			<label class="layui-form-label">摘要配图</label>
 			<div class="layui-input-block">
 				<span style="display:inline-block;width:160px;height:auto;background-color:#ccc;border:1px solid #ccc">
-					<img id="returnImgUrl" style="width:100%;" src="/uploads/image/20180927/1538035664471130.jpg" alt="">
+					<img id="returnImgUrl" style="width:100%;" src="/img/1.png" alt="">
 				</span>
-				<input type="hidden" name="photo" value="" class="newsIntroImg">
+				<input type="hidden"  name="photo" value="" class="newsIntroImg">
 				<div id="app"></div>
 				
 				 
 				
 			</div>
 		</div>
-		<div class="layui-form-item"style="height:400px">
+		<div class="layui-form-item">
 			<label class="layui-form-label">文章内容</label>
 			<div class="layui-input-block">
-		    	<textarea style="position:absolute;z-index:0;width:100%;height:350px;" name="contents" id="contents" >111</textarea>
+		    	<textarea style="width:100%;height:350px;" name="contents" id="contents" ></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -119,17 +119,14 @@
 
 
 
-
-
 window.onload=function(){
-
 
 	UploadImg({
 		el:"#app",
 		url:"/admin/uploadImg",
 		success:function (res){
 			$("#returnImgUrl")[0].src=res;
-
+			$(".newsIntroImg")[0].value=res;
 		}
 	})
 }

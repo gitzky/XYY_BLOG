@@ -40,12 +40,15 @@ class IndexController extends Controller
    		$postTypes=DB::table('post_type')->get();
   		
 
+      $list=DB::table("posts")->get();
+
+
    		$isPc=$this->isPc();
   		if($isPc){
 
-   			return view('Home/index',["title"=>$title,"content"=>$content,'postTypes'=>$postTypes]);
+   			return view('Home/index',["title"=>$title,"content"=>$content,'postTypes'=>$postTypes,"list"=>$list]);
   		}else{
-  			return view('Home/index',["title"=>$title,"content"=>$content,'postTypes'=>$postTypes]);
+  			return view('Home/index',["title"=>$title,"content"=>$content,'postTypes'=>$postTypes,"list"=>$list]);
   			// return "手机暂时不能访问";
   		}
    }

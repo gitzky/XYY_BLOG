@@ -113,7 +113,14 @@ Route::get('userInfo','UserController@userinfo');
 
 // 后台文章模块路由
 Route::get('list','PostController@list');
+Route::get('getData','PostController@getData');
+Route::get('delPost','PostController@delPost');
+
+
 Route::get('add','PostController@add');
+Route::get('postAdd','PostController@postAdd');
+
+
 Route::get('postType','PostController@postType');
 Route::get('updateType/{data}','PostController@updateType');
 Route::get('delType/{data}','PostController@delType');

@@ -8,32 +8,15 @@ layui.config({
 
 	//加载页面数据
 	var newsData = '';
-	$.get("/adm/json/newsList.json", function(data){
+
+	$.get("/admin/getData", function(data){
 		var newArray = [];
-		//单击首页“待审核文章”加载的信息
-		if($(".top_tab li.layui-this cite",parent.document).text() == "待审核文章"){
-			if(window.sessionStorage.getItem("addNews")){
-				var addNews = window.sessionStorage.getItem("addNews");
-				newsData = JSON.parse(addNews).concat(data);
-			}else{
-				newsData = data;
-			}
-			for(var i=0;i<newsData.length;i++){
-        		if(newsData[i].newsStatus == "待审核"){
-					newArray.push(newsData[i]);
-        		}
-        	}
-        	newsData = newArray;
-        	newsList(newsData);
-		}else{    //正常加载信息
-			newsData = data;
-			if(window.sessionStorage.getItem("addNews")){
-				var addNews = window.sessionStorage.getItem("addNews");
-				newsData = JSON.parse(addNews).concat(newsData);
-			}
-			//执行加载数据的方法
-			newsList();
-		}
+		data=JSON.parse(data)
+		
+		newsData = data;
+		
+		newsList(data);
+			
 	})
 
 	//查询
@@ -43,20 +26,16 @@ layui.config({
 			var index = layer.msg('查询中，请稍候',{icon: 16,time:false,shade:0.8});
             setTimeout(function(){
             	$.ajax({
-					url : "/adm/json/newsList.json",
+					url : "/admin/getData",
 					type : "get",
 					dataType : "json",
 					success : function(data){
-						if(window.sessionStorage.getItem("addNews")){
-							var addNews = window.sessionStorage.getItem("addNews");
-							newsData = JSON.parse(addNews).concat(data);
-						}else{
-							newsData = data;
-						}
+						data=JSON.parse(data)
+						newsData = data;
 						for(var i=0;i<newsData.length;i++){
 							var newsStr = newsData[i];
 							var selectStr = $(".search_input").val();
-		            		function changeStr(data){
+		            		function changeStr(data){ 
 		            			var dataStr = '';
 		            			var showNum = data.split(eval("/"+selectStr+"/ig")).length - 1;
 		            			if(showNum > 1){
@@ -133,7 +112,7 @@ layui.config({
 	            	//删除数据
 	            	for(var j=0;j<$checked.length;j++){
 	            		for(var i=0;i<newsData.length;i++){
-							if(newsData[i].newsId == $checked.eq(j).parents("tr").find(".news_del").attr("data-id")){
+							if(newsData[i].id == $checked.eq(j).parents("tr").find(".news_del").attr("data-id")){
 								newsData.splice(i,1);
 								newsList(newsData);
 							}
@@ -189,26 +168,33 @@ layui.config({
 	$("body").on("click",".news_del",function(){  //删除
 		var _this = $(this);
 		layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
-			//_this.parents("tr").remove();
+			 _this.parents("tr").remove();
 			for(var i=0;i<newsData.length;i++){
-				if(newsData[i].newsId == _this.attr("data-id")){
+				if(newsData[i].id == _this.attr("data-id")){
 					newsData.splice(i,1);
-					newsList(newsData);
 				}
 			}
+			$.get("/admin/delPost",{newsId:_this.attr("data-id")},function(res){
+				if(JSON.parse(res).code=="1"){
+					layer.msg("删除成功");
+					newsList(newsData);
+				}else{
+					layer.msg("删除失败")
+				}	
+			})
 			layer.close(index);
 		});
 	})
 
 	function newsList(that){
 		//渲染数据
+		console.log(that);
+	
 		function renderDate(data,curr){
 			var dataHtml = '';
-			if(!that){
-				currData = newsData.concat().splice(curr*nums-nums, nums);
-			}else{
-				currData = that.concat().splice(curr*nums-nums, nums);
-			}
+			
+			currData = that.concat().splice(curr*nums-nums, nums);
+			
 			if(currData.length != 0){
 				for(var i=0;i<currData.length;i++){
 					dataHtml += '<tr>'
@@ -220,7 +206,7 @@ layui.config({
 			    	+'<td><input type="checkbox" name="show" lay-skin="switch" lay-text="是|否" lay-filter="isShow"'+currData[i].isShow+'></td>'
 			    	+'<td>'
 					+  '<a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
-					+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="'+data[i].newsId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+					+  '<a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="'+data[i].id+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
 			        +'</td>'
 			    	+'</tr>';
 				}

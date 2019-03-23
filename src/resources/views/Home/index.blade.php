@@ -84,50 +84,32 @@
 					<!--文章列表开始-->
 					<div class="contentList">
 
+						@forelse($list as $v)
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<div class="contentleft">
-									<h4><a class="title" href="article_detail">使用 Nginx 实现 tomcat、glassfish 等 web 服务器负载均衡</a></h4>
+									<h4><a class="title" href="article_detail">{{$v->newsName}}</a></h4>
 									<p>
 										<a class="label label-default">Nginx</a>
 										<a class="label label-default">tomcat负载均衡</a>
 									</p>
-									<p class="overView">1.web服务器负载均衡简介web服务器负载均衡是指将多台可用单节点服务器组合成web服务器集群，然后通过负载均衡器将客户端请求均匀的转发到不同的单节点web服务器上，从而增加整个web服务器集群的吞吐量。</p>
+									<p class="overView">{{$v->newsIntro}}</p>
 									<p><span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">admin</a></span> <span class="count"><i class="glyphicon glyphicon-eye-open"></i>阅读:1003</span><span class="count"><i class="glyphicon glyphicon-comment"></i>评论:2</span><span class="count"><i class="glyphicon glyphicon-time"></i>2017-01-16</span></p>
 								</div>
 								<div class="contentImage">
 									<div class="row">
 										<a href="#" class="thumbnail w_thumbnail">
-											<img src="img/slider/Aj6bieY.jpg" alt="...">
+											<img src="{{$v->newsIntroImg}}" alt="...">
 										</a>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
+						@empty
+						<h2>暂时没有文章</h2>
+						@endforelse
 						
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<div class="contentleft">
-									<h4><a class="title" href="/post/41501569">使用 Nginx 实现 tomcat、glassfish 等 web 服务器负载均衡</a></h4>
-									<p>
-										<a class="label label-default">Nginx</a>
-										<a class="label label-default">tomcat负载均衡</a>
-									</p>
-									<p class="overView">1.web服务器负载均衡简介web服务器负载均衡是指将多台可用单节点服务器组合成web服务器集群，然后通过负载均衡器将客户端请求均匀的转发到不同的单节点web服务器上，从而增加整个web服务器集群的吞吐量。</p>
-									<p><span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">admin</a></span> <span class="count"><i class="glyphicon glyphicon-eye-open"></i>阅读:852</span><span class="count"><i class="glyphicon glyphicon-comment"></i>评论:99</span><span class="count"><i class="glyphicon glyphicon-time"></i>2016-08-25</span></p>
-								</div>
-								<div class="contentImage">
-									<!--<img src="img/slider/67zmaej.png"/>-->
-									<div class="row">
-										<a href="#" class="thumbnail w_thumbnail">
-											<img src="img/slider/67zmaej.png" alt="...">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+						
 
 					</div>
 					<!--文章列表结束-->
